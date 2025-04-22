@@ -5,3 +5,9 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
+export const nextConfig = {
+    experimental: {
+        appDir: true,
+    },
+}
