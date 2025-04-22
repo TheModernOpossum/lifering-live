@@ -28,7 +28,7 @@ export async function POST(req: Request) {
                 name,
                 email,
                 password: hashedPassword,
-                role: 'member', // you can change this default if needed
+                role: 'member',
             },
         })
 
