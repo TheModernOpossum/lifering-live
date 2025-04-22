@@ -5,16 +5,16 @@ import bcrypt from 'bcrypt'
 const prisma = new PrismaClient()
 
 export async function POST(req: Request) {
-    const { email, name, password } = await req.json()
+    const {email, name, password} = await req.json()
 
     if (!email || !password) {
-        return NextResponse.json({ error: 'Missing fields' }, { status: 400 })
+        return NextResponse.json({error: 'Missing fields'}, {status: 400})
     }
 
     try {
-        const existingUser = await prisma.user.findUnique({ where: { email } })
+        const existingUser = await prisma.user.findUnique({where: {email}})
         if (existingUser) {
-            return NextResponse.json({ error: 'Email already in use' }, { status: 409 })
+            return NextResponse.json({error: 'Email already in use'}, {status: 409})
         }
 
         const hashedPassword = await bcrypt.hash(password, 10)
@@ -27,7 +27,8 @@ export async function POST(req: Request) {
             },
         })
 
-        return NextResponse.json({ user })
+        return NextResponse.json({user})
     } catch (e) {
-        return NextResponse.json({ error: 'Registration failed' }, { status: 500 })
+        return NextResponse.json({error: 'Registration failed'}, {status: 500})
     }
+}
